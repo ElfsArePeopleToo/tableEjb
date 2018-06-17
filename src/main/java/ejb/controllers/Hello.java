@@ -1,8 +1,11 @@
 package ejb.controllers;
 
 
+import ejb.beans.HelloEjb;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -11,12 +14,12 @@ import java.io.Serializable;
 public class Hello implements Serializable {
 
     @EJB
-    private Hello helloEjb;
+    private HelloEjb helloEjb;
 
     private String message;
 
     public void setName(String name) {
-        message = helloEjb.sayHello(String name);
+        message = helloEjb.sayHello(name);
     }
 
     public String getMessage() {
