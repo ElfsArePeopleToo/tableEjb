@@ -1,8 +1,8 @@
 package ejb.beans;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
-@Stateful
+@Stateless
 public class HelloEjb {
     public String sayHello(String name) {
         return "Hello " + name;
