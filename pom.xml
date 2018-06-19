@@ -38,11 +38,7 @@
         <artifactId>amqp-client</artifactId>
         <version>5.2.0</version>
     </dependency>
-    <dependency>
-        <groupId>com.rabbitmq.jms</groupId>
-        <artifactId>rabbitmq-jms</artifactId>
-        <version>1.9.0</version>
-    </dependency>
+
 
 </dependencies>
 
