@@ -2,6 +2,7 @@ package ejb.beans;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 
@@ -31,10 +32,8 @@ public class Consumer {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
 //                String message = new String(body, "UTF-8");
-//                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-//                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-                orderJson = new ObjectMapper().readValue(body, OrderJson.class);
+                ObjectMapper mapper = new ObjectMapper();
+                orderJson = mapper.readValue(body, OrderJson.class);
                 System.out.println("Received '" + orderJson + "'");
             }
         };
