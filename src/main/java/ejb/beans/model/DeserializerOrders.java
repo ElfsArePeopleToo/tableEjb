@@ -27,8 +27,8 @@ public class DeserializerOrders extends StdDeserializer<OrderJson> {
     public OrderJson deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         int regNumberOrder = (Integer) ((IntNode) node.get("regNumberOrder")).numberValue();
-        JsonNode arrNodeWayPoints = node.get("wayPoint");
 
+        JsonNode arrNodeWayPoints = node.get("wayPoint");
         List<String> wayPoints = new ArrayList<String>();
         if (arrNodeWayPoints.isArray()) {
             for (final JsonNode objNode : arrNodeWayPoints) {
@@ -38,7 +38,7 @@ public class DeserializerOrders extends StdDeserializer<OrderJson> {
 
         String regNumber = node.get("regNumber").asText();
 
-        JsonNode arrNodeDrivers = node.get("wayPoint");
+        JsonNode arrNodeDrivers = node.get("drivers");
         List<String> drivers = new ArrayList<String>();
         if (arrNodeDrivers.isArray()) {
             for (final JsonNode objNode : arrNodeDrivers) {
