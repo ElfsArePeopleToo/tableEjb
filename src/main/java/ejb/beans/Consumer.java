@@ -5,27 +5,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 import ejb.beans.model.OrderJson;
 
-import javax.ejb.EJB;
+
 import javax.ejb.Stateless;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.TimeoutException;
 
 
 @Stateless
 public class Consumer {
 
-    @EJB
     private OrderJson orderJson;
 
     private final static String QUEUE_NAME = "ordersQueue";
 
-    public void receive(){
+    private List<OrderJson> orders = new ArrayList<OrderJson>();
+
+    public List<OrderJson> receive(){
     try {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         final Connection connection = factory.newConnection();
 
-        Channel channel = connection.createChannel();
+        final Channel channel = connection.createChannel();
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         final com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel) {
@@ -35,17 +40,24 @@ public class Consumer {
                     throws IOException {
 
                     String message = new String(body, "UTF-8");
+                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
-                    orderJson = mapper.readValue(body, OrderJson.class);
-                    System.out.println("Received '" + orderJson + "'");
+                OrderJson orderJson = mapper.readValue(body, OrderJson.class);
+                orders.add(orderJson);
+//                    System.out.println("Received '" + orderJson + "'");
+
             }
+
         };
         channel.basicConsume(QUEUE_NAME, true, consumer);
+
+
     }catch(IOException e){
         e.printStackTrace();
     }catch (TimeoutException e){
         e.printStackTrace();
     }
+return orders;
 }
 
     public Consumer(){

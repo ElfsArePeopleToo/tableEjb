@@ -28,7 +28,7 @@ public class DeserializerOrders extends StdDeserializer<OrderJson> {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         int regNumberOrder = (Integer) ((IntNode) node.get("regNumberOrder")).numberValue();
 
-        JsonNode arrNodeWayPoints = node.get("wayPoint");
+        JsonNode arrNodeWayPoints = node.get("wayPoints");
         List<String> wayPoints = new ArrayList<String>();
         if (arrNodeWayPoints.isArray()) {
             for (final JsonNode objNode : arrNodeWayPoints) {
