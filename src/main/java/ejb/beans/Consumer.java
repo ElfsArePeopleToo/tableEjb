@@ -6,17 +6,18 @@ import com.rabbitmq.client.*;
 import ejb.beans.model.OrderJson;
 
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.TimeoutException;
 
 
 @Stateless
 public class Consumer {
+
 
     private OrderJson orderJson;
 
@@ -52,12 +53,12 @@ public class Consumer {
         channel.basicConsume(QUEUE_NAME, true, consumer);
 
 
-    }catch(IOException e){
+    }catch(IOException e) {
         e.printStackTrace();
-    }catch (TimeoutException e){
+    } catch (TimeoutException e) {
         e.printStackTrace();
     }
-return orders;
+        return orders;
 }
 
     public Consumer(){
