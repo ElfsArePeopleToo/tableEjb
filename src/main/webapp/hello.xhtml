@@ -4,31 +4,85 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<head>
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>ejb-in-war</title>
-</head>
+    <title>ejb</title>
+</h:head>
 
-<body>
+<h:body>
+    <h1>Orders Information</h1>
+    <table class ="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" class="order-table-header">Order number</th>
+            <th scope="col" class="order-table-header">Order status</th>
+            <th scope="col" class="order-table-header">Waggon</th>
+            <th scope="col" class="order-table-header">Drivers</th>
+            <th scope="col" class="order-table-header">WayPoints</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ui:repeat var="item" value="#{loadInfo.info}" varStatus="status">
 
-<h1>Greeter Service</h1>
-<div id="container">
-    <h:form id="response">
-        <h:panelGrid columns="2">
-            <h:outputLabel>Response:</h:outputLabel>
-            <h:outputLabel value="#{hello.message}" />
-        </h:panelGrid>
-    </h:form>
-    <h:form id="greetForm">
-        <h:panelGrid columns="3">
-            <h:outputLabel>Name:</h:outputLabel>
-            <h:inputText value="#{name}" />
-            <h:commandButton id="add" value="Greet"
-                             action="#{hello.setName(name)}">
-            </h:commandButton>
-        </h:panelGrid>
-    </h:form>
-</div>
+        <tr>
+            <td scope="row" class="order-table-row">#{item.regNumberOrder}</td>
+            <td scope="row" class="order-table-row">#{item.orderStatus}</td>
+            <td scope="row" class="order-table-row">#{item.regNumber}</td>
+            <td scope="row" class="order-table-row">#{item.drivers}</td>
+            <td scope="row" class="order-table-row">#{item.wayPoints}</td>
 
-</body>
+        </tr>
+
+        </ui:repeat>
+        </tbody>
+
+    </table>
+</h:body>
+        <!--<ui:repeat var="item" value="#{loadInfo.info}">-->
+            <!--<h3>#{item.regNumberOrder}</h3>-->
+        <!--</ui:repeat>-->
+        <!--<ui:repeat var="item" value="#{loadInfo.info}">-->
+            <!--<h3>#{item.regNumberOrder}</h3>-->
+        <!--</ui:repeat>-->
+
+
+
+
+    <!--<h:dataTable value="#{loadInfo.info}}}" var="o"-->
+                 <!--styleClass="order-table"-->
+                 <!--headerClass="order-table-header"-->
+                 <!--rowClasses="order-table-odd-row,order-table-even-row"-->
+    <!--&gt;-->
+
+        <!--<h:column>-->
+            <!--&lt;!&ndash; column header &ndash;&gt;-->
+            <!--<f:facet name="header">Order Number</f:facet>-->
+            <!--&lt;!&ndash; row record &ndash;&gt;-->
+            <!--#{o.regNumberOrder}-->
+        <!--</h:column>-->
+
+        <!--<h:column>-->
+            <!--<f:facet name="header">Status</f:facet>-->
+            <!--#{o.orderStatus}-->
+        <!--</h:column>-->
+
+        <!--<h:column>-->
+            <!--<f:facet name="header">Waggon</f:facet>-->
+            <!--#{o.regNumber}-->
+        <!--</h:column>-->
+
+        <!--<h:column>-->
+            <!--<f:facet name="header">Waypoints</f:facet>-->
+            <!--#{o.wayPoints}-->
+        <!--</h:column>-->
+        <!--<h:column>-->
+            <!--<f:facet name="header">Drivers</f:facet>-->
+            <!--#{o.drivers}-->
+        <!--</h:column>-->
+
+    <!--</h:dataTable>-->
+
 </html>
