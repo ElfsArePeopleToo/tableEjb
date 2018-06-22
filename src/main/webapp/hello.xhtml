@@ -4,32 +4,36 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<head>
+<h:head>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>ejb-in-war</title>
-</head>
+    <title>ejb</title>
+</h:head>
 
 <h:body>
     <h1>Orders Information</h1>
-    <table class="order-table">
-
+    <table class ="table table-bordered">
+        <thead>
         <tr>
-            <th class="order-table-header">Order number</th>
-            <th class="order-table-header">Order status</th>
-            <th class="order-table-header">Waggon</th>
-            <th class="order-table-header">Drivers</th>
-            <th class="order-table-header">WayPoints</th>
+            <th scope="col" class="order-table-header">Order number</th>
+            <th scope="col" class="order-table-header">Order status</th>
+            <th scope="col" class="order-table-header">Waggon</th>
+            <th scope="col" class="order-table-header">Drivers</th>
+            <th scope="col" class="order-table-header">WayPoints</th>
         </tr>
-
+        </thead>
         <tbody>
         <ui:repeat var="item" value="#{loadInfo.info}" varStatus="status">
 
         <tr>
-            <td class="order-table-row">#{item.regNumberOrder}</td>
-            <td class="order-table-row">#{item.orderStatus}</td>
-            <td class="order-table-row">#{item.regNumber}</td>
-            <td class="order-table-row">#{item.drivers}</td>
-            <td class="order-table-row">#{item.wayPoints}</td>
+            <td scope="row" class="order-table-row">#{item.regNumberOrder}</td>
+            <td scope="row" class="order-table-row">#{item.orderStatus}</td>
+            <td scope="row" class="order-table-row">#{item.regNumber}</td>
+            <td scope="row" class="order-table-row">#{item.drivers}</td>
+            <td scope="row" class="order-table-row">#{item.wayPoints}</td>
+
         </tr>
 
         </ui:repeat>
