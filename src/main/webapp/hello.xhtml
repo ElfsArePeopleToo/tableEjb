@@ -9,11 +9,43 @@
     <title>ejb-in-war</title>
 </head>
 
-<body>
-<div>
-
+<h:body>
     <h1>Orders Information</h1>
-    <ui:repeat var="item" value="#{loadInfo.info}"> <h3>#{item.regNumberOrder}</h3> </ui:repeat>
+    <table class="order-table">
+
+        <tr>
+            <th class="order-table-header">Order number</th>
+            <th class="order-table-header">Order status</th>
+            <th class="order-table-header">Waggon</th>
+            <th class="order-table-header">Drivers</th>
+            <th class="order-table-header">WayPoints</th>
+        </tr>
+
+        <tbody>
+        <ui:repeat var="item" value="#{loadInfo.info}" varStatus="status">
+
+        <tr>
+            <td class="order-table-row">#{item.regNumberOrder}</td>
+            <td class="order-table-row">#{item.orderStatus}</td>
+            <td class="order-table-row">#{item.regNumber}</td>
+            <td class="order-table-row">#{item.drivers}</td>
+            <td class="order-table-row">#{item.wayPoints}</td>
+        </tr>
+
+        </ui:repeat>
+        </tbody>
+
+    </table>
+</h:body>
+        <!--<ui:repeat var="item" value="#{loadInfo.info}">-->
+            <!--<h3>#{item.regNumberOrder}</h3>-->
+        <!--</ui:repeat>-->
+        <!--<ui:repeat var="item" value="#{loadInfo.info}">-->
+            <!--<h3>#{item.regNumberOrder}</h3>-->
+        <!--</ui:repeat>-->
+
+
+
 
     <!--<h:dataTable value="#{loadInfo.info}}}" var="o"-->
                  <!--styleClass="order-table"-->
@@ -49,8 +81,4 @@
 
     <!--</h:dataTable>-->
 
-
-</div>
-
-</body>
 </html>
