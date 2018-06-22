@@ -13,40 +13,41 @@
 <div>
 
     <h1>Orders Information</h1>
+    <ui:repeat var="item" value="#{loadInfo.info}"> <h3>#{item.regNumberOrder}</h3> </ui:repeat>
 
-    <h:dataTable value="#{loadInfo.info}}}" var="o"
-                 styleClass="order-table"
-                 headerClass="order-table-header"
-                 rowClasses="order-table-odd-row,order-table-even-row"
-    >
+    <!--<h:dataTable value="#{loadInfo.info}}}" var="o"-->
+                 <!--styleClass="order-table"-->
+                 <!--headerClass="order-table-header"-->
+                 <!--rowClasses="order-table-odd-row,order-table-even-row"-->
+    <!--&gt;-->
 
-        <h:column>
-            <!-- column header -->
-            <f:facet name="header">Order Number</f:facet>
-            <!-- row record -->
-            #{o.regNumberOrder}
-        </h:column>
+        <!--<h:column>-->
+            <!--&lt;!&ndash; column header &ndash;&gt;-->
+            <!--<f:facet name="header">Order Number</f:facet>-->
+            <!--&lt;!&ndash; row record &ndash;&gt;-->
+            <!--#{o.regNumberOrder}-->
+        <!--</h:column>-->
 
-        <h:column>
-            <f:facet name="header">Status</f:facet>
-            #{o.orderStatus}
-        </h:column>
+        <!--<h:column>-->
+            <!--<f:facet name="header">Status</f:facet>-->
+            <!--#{o.orderStatus}-->
+        <!--</h:column>-->
 
-        <h:column>
-            <f:facet name="header">Waggon</f:facet>
-            #{o.regNumber}
-        </h:column>
+        <!--<h:column>-->
+            <!--<f:facet name="header">Waggon</f:facet>-->
+            <!--#{o.regNumber}-->
+        <!--</h:column>-->
 
-        <h:column>
-            <f:facet name="header">Waypoints</f:facet>
-            #{o.wayPoints}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Drivers</f:facet>
-            #{o.drivers}
-        </h:column>
+        <!--<h:column>-->
+            <!--<f:facet name="header">Waypoints</f:facet>-->
+            <!--#{o.wayPoints}-->
+        <!--</h:column>-->
+        <!--<h:column>-->
+            <!--<f:facet name="header">Drivers</f:facet>-->
+            <!--#{o.drivers}-->
+        <!--</h:column>-->
 
-    </h:dataTable>
+    <!--</h:dataTable>-->
 
 
 </div>
