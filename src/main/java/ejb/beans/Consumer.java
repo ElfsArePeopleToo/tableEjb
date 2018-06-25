@@ -17,23 +17,16 @@ import java.util.concurrent.TimeoutException;
 
 @Stateless
 public class Consumer {
-
-
-    private OrderJson orderJson;
-
-    private final static String QUEUE_NAME = "ordersQueue";
-
     private List<OrderJson> orders = new ArrayList<OrderJson>();
 
-    public List<OrderJson> receive(){
+    public List<OrderJson> receive(String QueueName){
     try {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         final Connection connection = factory.newConnection();
 
         final Channel channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-
+        channel.queueDeclare(QueueName, true, false, false, null);
         final com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel) {
 
             @Override
@@ -43,16 +36,13 @@ public class Consumer {
                     String message = new String(body, "UTF-8");
                     System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
-                OrderJson orderJson = mapper.readValue(body, OrderJson.class);
-                orders.add(orderJson);
+                    OrderJson orderJson = mapper.readValue(body, OrderJson.class);
+                    orders.add(orderJson);
 //                    System.out.println("Received '" + orderJson + "'");
-
             }
 
         };
-        channel.basicConsume(QUEUE_NAME, true, consumer);
-
-
+        channel.basicConsume(QueueName, true, consumer);
     }catch(IOException e) {
         e.printStackTrace();
     } catch (TimeoutException e) {
@@ -60,7 +50,6 @@ public class Consumer {
     }
         return orders;
 }
-
     public Consumer(){
     }
 }
