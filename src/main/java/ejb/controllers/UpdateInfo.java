@@ -6,8 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.ws.rs.Path;
 
-@Named("updateInfo")
+@Path("updateInfo")
 @Stateless
 public class UpdateInfo {
     @EJB
