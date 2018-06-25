@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.ejb.Stateless;
 import java.io.Serializable;
 import java.util.List;
-
-
-@JsonDeserialize(using = DeserializerOrders.class)
+//
+//
+//@JsonDeserialize(using = DeserializerOrders.class)
 public class OrderJson implements Serializable {
 
     private Integer regNumberOrder;
