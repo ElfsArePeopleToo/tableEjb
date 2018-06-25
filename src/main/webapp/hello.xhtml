@@ -36,14 +36,11 @@
         </ui:repeat>
         </tbody>
     </table>
-    <h:outputText value = "#{loadInfo.infoDriver}">
-        <!--<f:ajax event="change" render="total"-->
-                <!--listener="#{loadInfo.infoDriver}"/>-->
+    <h:outputText value = "#{loadInfo.infoDriver}" rendered="true">
+        <f:ajax event="update" listener="#{updateInfo.updateInfo}"/>
     </h:outputText>
-    <h:outputText value = "#{loadInfo.infoWaggon}">
-        <!--<f:ajax event="change" render="total"-->
-                <!--listener="#{loadInfo.infoWaggon}"-->
-        <!--/>-->
+    <h:outputText value = "#{loadInfo.infoWaggon}" rendered="true">
+            <f:ajax event="update" listener="#{updateInfo.updateInfo}"/>
     </h:outputText>
 </h:body>
 
