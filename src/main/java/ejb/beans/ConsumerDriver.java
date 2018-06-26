@@ -5,12 +5,17 @@ import com.rabbitmq.client.*;
 import ejb.beans.model.DriverJson;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @Stateless
 public class ConsumerDriver {
     private DriverJson driverJson;
+
+    @Inject
+    private BeanManager beanManager;
 
     public DriverJson receive(String QueueName){
         try {
@@ -26,11 +31,12 @@ public class ConsumerDriver {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                         throws IOException {
 
-                    String message = new String(body, "UTF-8");
-                    System.out.println(message);
+//                    String message = new String(body, "UTF-8");
+//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     driverJson = mapper.readValue(body, DriverJson.class);
                     System.out.println("Received '" + driverJson + "'");
+                    beanManager.fireEvent(driverJson);
                 }
             };
 

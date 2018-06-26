@@ -1,15 +1,21 @@
-package ejb.beans.model;
+package ejb.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
+import ejb.beans.model.WaggonJson;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 @Stateless
 public class ConsumerWaggon {
     private WaggonJson waggonJson;
+
+    @Inject
+    private BeanManager beanManager;
 
     public WaggonJson receive(String QueueName){
         try {
@@ -24,11 +30,12 @@ public class ConsumerWaggon {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                         throws IOException {
 
-                    String message = new String(body, "UTF-8");
-                    System.out.println(message);
+//                    String message = new String(body, "UTF-8");
+//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     waggonJson = mapper.readValue(body, WaggonJson.class);
                     System.out.println("Received '" + waggonJson + "'");
+                    beanManager.fireEvent(waggonJson);
                 }
             };
 

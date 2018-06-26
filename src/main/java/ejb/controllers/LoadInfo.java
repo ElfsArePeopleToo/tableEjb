@@ -2,10 +2,11 @@ package ejb.controllers;
 
 import ejb.beans.Consumer;
 import ejb.beans.ConsumerDriver;
-import ejb.beans.model.ConsumerWaggon;
+import ejb.beans.ConsumerWaggon;
 import ejb.beans.model.DriverJson;
 import ejb.beans.model.OrderJson;
 import ejb.beans.model.WaggonJson;
+import ejb.service.ServiceGet;
 
 
 import javax.ejb.EJB;
