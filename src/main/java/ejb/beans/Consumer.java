@@ -8,6 +8,7 @@ import ejb.beans.model.OrderJson;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.concurrent.TimeoutException;
 @Stateless
 public class Consumer {
     private List<OrderJson> orders = new ArrayList<OrderJson>();
+    @Inject
+    private BeanManager beanManager;
 
     public List<OrderJson> receive(String QueueName){
     try {
@@ -33,14 +36,15 @@ public class Consumer {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
 
-                    String message = new String(body, "UTF-8");
-                    System.out.println(message);
+//                    String message = new String(body, "UTF-8");
+//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     OrderJson orderJson = mapper.readValue(body, OrderJson.class);
                     orders.add(orderJson);
+                    beanManager.fireEvent(orderJson);
+
 //                    System.out.println("Received '" + orderJson + "'");
             }
-
         };
         channel.basicConsume(QueueName, true, consumer);
     }catch(IOException e) {
