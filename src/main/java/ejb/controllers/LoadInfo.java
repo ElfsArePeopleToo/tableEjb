@@ -18,7 +18,6 @@ import java.util.List;
 @Named("loadInfo")
 @SessionScoped
 public class LoadInfo implements Serializable {
-
     @EJB
     Consumer consumer;
 

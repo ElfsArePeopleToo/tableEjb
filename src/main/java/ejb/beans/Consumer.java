@@ -4,8 +4,11 @@ package ejb.beans;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 import ejb.beans.model.OrderJson;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.BeanManager;
@@ -14,11 +17,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
-
-
+@Slf4j
+@NoArgsConstructor
 @Stateless
 public class Consumer {
     private List<OrderJson> orders = new ArrayList<OrderJson>();
+    private Connection connection;
+
     @Inject
     private BeanManager beanManager;
 
@@ -26,7 +31,7 @@ public class Consumer {
     try {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        final Connection connection = factory.newConnection();
+        connection = factory.newConnection();
 
         final Channel channel = connection.createChannel();
         channel.queueDeclare(QueueName, true, false, false, null);
@@ -48,13 +53,21 @@ public class Consumer {
         };
         channel.basicConsume(QueueName, true, consumer);
     }catch(IOException e) {
-        e.printStackTrace();
+        log.error("Connection fail.");
     } catch (TimeoutException e) {
-        e.printStackTrace();
+       log.error("Connection is timeout.");
     }
         return orders;
 }
-    public Consumer(){
-    }
+
+    @PreDestroy
+    public void close(){
+        try{
+            connection.close();
+        } catch (IOException e) {
+            log.error("Connection fail.");
+        }
+}
+
 }
 
