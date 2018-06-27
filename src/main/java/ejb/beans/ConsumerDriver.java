@@ -19,6 +19,7 @@ import java.util.concurrent.TimeoutException;
 public class ConsumerDriver {
     private DriverJson driverJson;
     private Connection connection;
+    private Channel channel;
 
     @Inject
     private BeanManager beanManager;
@@ -37,11 +38,10 @@ public class ConsumerDriver {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                         throws IOException {
 
-//                    String message = new String(body, "UTF-8");
-//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     driverJson = mapper.readValue(body, DriverJson.class);
                     log.info(String.valueOf(driverJson));
+
                 }
             };
             channel.basicConsume(QueueName, true, consumer);
@@ -53,12 +53,5 @@ public class ConsumerDriver {
         return driverJson;
     }
 
-    @PreDestroy
-    public void close(){
-        try {
-            connection.close();
-        }catch (IOException e) {
-            log.error("Connection close fail.");
-        }
-    }
+
 }

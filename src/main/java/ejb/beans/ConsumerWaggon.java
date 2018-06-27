@@ -18,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 public class ConsumerWaggon {
     private WaggonJson waggonJson;
     private Connection connection;
+    private Channel channel;
 
     @Inject
     private BeanManager beanManager;
@@ -35,8 +36,6 @@ public class ConsumerWaggon {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                         throws IOException {
 
-//                    String message = new String(body, "UTF-8");
-//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     waggonJson = mapper.readValue(body, WaggonJson.class);
                     log.info(String.valueOf(waggonJson));
@@ -44,6 +43,7 @@ public class ConsumerWaggon {
             };
 
             channel.basicConsume(QueueName, true, consumer);
+
         }catch(IOException e) {
             log.error("Connection fail.");
         } catch (TimeoutException e) {
@@ -52,12 +52,4 @@ public class ConsumerWaggon {
         return waggonJson;
     }
 
-    @PreDestroy
-    public void close(){
-        try{
-            connection.close();
-        } catch (IOException e) {
-            log.error("Connection close fail.");
-        }
-    }
 }

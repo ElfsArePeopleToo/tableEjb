@@ -23,6 +23,7 @@ import java.util.concurrent.TimeoutException;
 public class Consumer {
     private List<OrderJson> orders = new ArrayList<OrderJson>();
     private Connection connection;
+    private Channel channel;
 
     @Inject
     private BeanManager beanManager;
@@ -41,8 +42,6 @@ public class Consumer {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
 
-//                    String message = new String(body, "UTF-8");
-//                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     OrderJson orderJson = mapper.readValue(body, OrderJson.class);
                     orders.add(orderJson);
@@ -50,21 +49,13 @@ public class Consumer {
             }
         };
         channel.basicConsume(QueueName, true, consumer);
+
     }catch(IOException e) {
         log.error("Connection fail.");
     } catch (TimeoutException e) {
        log.error("Connection is timeout.");
     }
         return orders;
-}
-
-    @PreDestroy
-    public void close(){
-        try{
-            connection.close();
-        } catch (IOException e) {
-            log.error("Connection fail.");
-        }
 }
 
 }
