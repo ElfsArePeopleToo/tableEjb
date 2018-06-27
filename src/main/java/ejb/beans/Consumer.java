@@ -46,9 +46,7 @@ public class Consumer {
                     ObjectMapper mapper = new ObjectMapper();
                     OrderJson orderJson = mapper.readValue(body, OrderJson.class);
                     orders.add(orderJson);
-                    beanManager.fireEvent(orderJson);
-
-//                    System.out.println("Received '" + orderJson + "'");
+                    log.info("Received" + orders);
             }
         };
         channel.basicConsume(QueueName, true, consumer);

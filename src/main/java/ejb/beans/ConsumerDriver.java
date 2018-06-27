@@ -41,8 +41,7 @@ public class ConsumerDriver {
 //                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     driverJson = mapper.readValue(body, DriverJson.class);
-                    System.out.println("Received '" + driverJson + "'");
-                    beanManager.fireEvent(driverJson);
+                    log.info(String.valueOf(driverJson));
                 }
             };
             channel.basicConsume(QueueName, true, consumer);

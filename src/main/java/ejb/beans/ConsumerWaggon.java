@@ -39,8 +39,7 @@ public class ConsumerWaggon {
 //                    System.out.println(message);
                     ObjectMapper mapper = new ObjectMapper();
                     waggonJson = mapper.readValue(body, WaggonJson.class);
-                    System.out.println("Received '" + waggonJson + "'");
-                    beanManager.fireEvent(waggonJson);
+                    log.info(String.valueOf(waggonJson));
                 }
             };
 
