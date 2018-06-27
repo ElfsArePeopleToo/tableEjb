@@ -25,22 +25,34 @@
         </tr>
         </thead>
         <tbody>
-        <ui:repeat var="item" value="#{loadInfo.info}" varStatus="status">
+        <ui:repeat id = "orders" var="item" value="#{loadInfo.info}">
             <tr>
                 <td scope="row" class="order-table-row">#{item.regNumberOrder}</td>
-                <td scope="row" class="order-table-row">#{item.orderStatus}</td>
-                <td scope="row" class="order-table-row">#{item.regNumber}</td>
-                <td scope="row" class="order-table-row">#{item.drivers}</td>
-                <td scope="row" class="order-table-row">#{item.wayPoints}</td>
+                <td class="order-table-row">#{item.orderStatus}</td>
+                <td class="order-table-row">#{item.regNumber}</td>
+                <td class="order-table-row">#{item.drivers}</td>
+                <td class="order-table-row">#{item.wayPoints}</td>
             </tr>
         </ui:repeat>
+        <f:websocket channel="update" >
+            <f:ajax event="update" render="orders"/>
+        </f:websocket>
         </tbody>
     </table>
-    <h:outputText value = "#{loadInfo.infoDriver}" rendered="true">
-        <f:ajax event="update" listener="#{updateInfo.updateInfo}"/>
+    <h:outputText id = "drivers" value = "#{loadInfo.infoDriver}">
+        <f:websocket channel="update" >
+            <f:ajax event="update" render="drivers"/>
+        </f:websocket>
+        <!--<f:ajax event="change" render="total"-->
+                <!--listener="#{loadInfo.infoDriver}"/>-->
     </h:outputText>
-    <h:outputText value = "#{loadInfo.infoWaggon}" rendered="true">
-            <f:ajax event="update" listener="#{updateInfo.updateInfo}"/>
+    <h:outputText id = "waggons" value = "#{loadInfo.infoWaggon}">
+        <f:websocket channel="update" >
+            <f:ajax event="update" render="waggons"/>
+        </f:websocket>
+        <!--<f:ajax event="change" render="total"-->
+                <!--listener="#{loadInfo.infoWaggon}"-->
+        <!--/>-->
     </h:outputText>
 </h:body>
 
