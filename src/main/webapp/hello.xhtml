@@ -29,10 +29,10 @@
         <ui:repeat id = "orders" var="item" value="#{loadInfo.info}">
             <tr>
                 <td scope="row" class="order-table-row">#{item.regNumberOrder}</td>
-                <td scope="row" class="order-table-row">#{item.orderStatus}</td>
-                <td scope="row" class="order-table-row">#{item.regNumber}</td>
-                <td scope="row" class="order-table-row">#{item.drivers}</td>
-                <td scope="row" class="order-table-row">#{item.wayPoints}</td>
+                <td class="order-table-row">#{item.orderStatus}</td>
+                <td class="order-table-row">#{item.regNumber}</td>
+                <td class="order-table-row">#{item.drivers}</td>
+                <td class="order-table-row">#{item.wayPoints}</td>
             </tr>
         </ui:repeat>
         <f:websocket channel="update" >

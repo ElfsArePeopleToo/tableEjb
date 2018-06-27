@@ -2,7 +2,6 @@ package ejb.service;
 
 import ejb.beans.model.GetResponse;
 
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -19,6 +18,5 @@ public class ServiceGet {
                 .target(REST_URI)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(GetResponse.class);
-
     }
 }
