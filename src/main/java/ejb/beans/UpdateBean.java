@@ -1,16 +1,14 @@
 package ejb.beans;
 
 import ejb.beans.model.DriverJson;
-import ejb.beans.model.GetResponse;
 import ejb.beans.model.OrderJson;
 import ejb.beans.model.WaggonJson;
 import ejb.controllers.LoadInfo;
-import ejb.service.ServiceGet;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
@@ -20,6 +18,7 @@ import java.util.List;
 
 @Slf4j
 @Named
+@Data
 @ApplicationScoped
 public class UpdateBean implements Serializable {
     @Inject
@@ -30,7 +29,7 @@ public class UpdateBean implements Serializable {
     LoadInfo loadInfo;
 
     public void loadUpdateWaggons(){
-       WaggonJson waggonJson= loadInfo.getInfoWaggon();
+       WaggonJson waggonJson = loadInfo.getInfoWaggon();
        log.info(waggonJson.toString());
        push.send(waggonJson);
     }

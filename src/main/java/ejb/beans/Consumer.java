@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
-import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
@@ -17,10 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+
 @Slf4j
 @NoArgsConstructor
 @Stateless
-public class Consumer {
+public class Consumer{
     private List<OrderJson> orders = new ArrayList<OrderJson>();
     private Connection connection;
     private Channel channel;

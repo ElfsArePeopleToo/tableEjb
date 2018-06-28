@@ -45,18 +45,28 @@
     </table>
 
 
+<h:dataTable id = "drivers" value = "#{loadInfo.infoDriver}" var ="driverItem">
+    <h:column library="javax.faces" name="jsf.js" target="head">
+           <f:facet name="header">All drivers</f:facet>
+            #{loadInfo.infoDriver.driversCount}
+    </h:column>
+    <h:column library="javax.faces" name="jsf.js" target="head">
+        <f:facet name="header">All busy drivers</f:facet>
+            #{loadInfo.infoDriver.busyDriversCount}
+    </h:column>
+    <h:column library="javax.faces" name="jsf.js" target="head">
+        <f:facet name="header">All free drivers</f:facet>
+            #{loadInfo.infoDriver.freeDriversCount}"
+    </h:column>
+</h:dataTable>
 
-    <h:outputText id = "drivers" var =  "itemD" value = "
-    #{loadInfo.infoDriver.busyDriversCount}
-    #{loadInfo.infoDriver.driversCount}
-    #{loadInfo.infoDriver.freeDriversCount}">
-
+    <h:form>
         <f:websocket channel="update" >
             <f:ajax event="update" render=":drivers"/>
         </f:websocket>
-    </h:outputText>
+    </h:form>
 
-    <h:outputText id = "waggons" value = "
+    <h:outputText library="javax.faces" name="jsf.js" target="head" id = "waggons" value = "
     #{loadInfo.infoWaggon.allWaggonsCount}
     #{loadInfo.infoWaggon.brokenWaggonCount}
     #{loadInfo.infoWaggon.workingWaggonCount}

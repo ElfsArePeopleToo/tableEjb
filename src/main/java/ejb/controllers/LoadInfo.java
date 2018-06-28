@@ -6,16 +6,17 @@ import ejb.beans.ConsumerWaggon;
 import ejb.beans.model.DriverJson;
 import ejb.beans.model.OrderJson;
 import ejb.beans.model.WaggonJson;
-import ejb.service.ServiceGet;
-
+import lombok.Data;
 
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named("loadInfo")
+@Data
 @SessionScoped
 public class LoadInfo implements Serializable {
     @EJB

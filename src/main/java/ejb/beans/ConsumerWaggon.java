@@ -6,7 +6,8 @@ import ejb.beans.model.WaggonJson;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PreDestroy;
+
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeoutException;
 @Slf4j
 @NoArgsConstructor
 @Stateless
-public class ConsumerWaggon {
+public class ConsumerWaggon{
     private WaggonJson waggonJson;
     private Connection connection;
     private Channel channel;
