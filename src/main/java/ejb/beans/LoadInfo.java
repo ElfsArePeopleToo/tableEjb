@@ -1,4 +1,4 @@
-package ejb.controllers;
+package ejb.beans;
 
 import ejb.beans.Consumer;
 import ejb.beans.ConsumerDriver;

@@ -3,7 +3,6 @@ package ejb.beans;
 import ejb.beans.model.DriverJson;
 import ejb.beans.model.OrderJson;
 import ejb.beans.model.WaggonJson;
-import ejb.controllers.LoadInfo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

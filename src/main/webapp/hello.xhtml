@@ -9,13 +9,14 @@
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
     <h:outputStylesheet library="css" name="bootstrap-reboot.min.css"/>
+    <h:outputStylesheet library="css" name="index.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>ejb</title>
 </h:head>
 
 <h:body>
-    <h1>Orders Information</h1>
-    <table class ="table table-bordered">
+    <h3 align="center">Orders Information</h3>
+    <table class ="table table-sm table-striped">
         <thead>
         <tr>
             <th scope="col" class="order-table-header">Order number</th>
@@ -43,20 +44,19 @@
 
         </tbody>
     </table>
-
-
-<h:dataTable id = "drivers" value = "#{loadInfo.infoDriver}" var ="driverItem">
-    <h:column library="javax.faces" name="jsf.js" target="head">
-           <f:facet name="header">All drivers</f:facet>
+<h3 align="center">Drivers</h3>
+<h:dataTable class ="table table-border" id = "drivers" value = "#{loadInfo.infoDriver}" var ="driverItem">
+    <h:column scope="col" library="javax.faces" name="jsf.js" target="head">
+           <f:facet scope="row" name="header">All drivers</f:facet>
             #{loadInfo.infoDriver.driversCount}
     </h:column>
-    <h:column library="javax.faces" name="jsf.js" target="head">
-        <f:facet name="header">All busy drivers</f:facet>
+    <h:column scope="col" library="javax.faces" name="jsf.js" target="head">
+        <f:facet name="header">Busy drivers</f:facet>
             #{loadInfo.infoDriver.busyDriversCount}
     </h:column>
-    <h:column library="javax.faces" name="jsf.js" target="head">
-        <f:facet name="header">All free drivers</f:facet>
-            #{loadInfo.infoDriver.freeDriversCount}"
+    <h:column scope="col" library="javax.faces" name="jsf.js" target="head">
+        <f:facet name="header">Free drivers</f:facet>
+            #{loadInfo.infoDriver.freeDriversCount}
     </h:column>
 </h:dataTable>
 
@@ -65,19 +65,38 @@
             <f:ajax event="update" render=":drivers"/>
         </f:websocket>
     </h:form>
+    <h3 align="center">Waggons</h3>
+<h:dataTable class ="table table-border"  id = "waggons" value = "#{loadInfo.infoWaggon}" var ="waggonItem">
+    <h:column library="javax.faces" name="jsf.js" target="head">
+        <f:facet name="header">All waggons</f:facet>
+          #{loadInfo.infoWaggon.allWaggonsCount}
+    </h:column>
 
-    <h:outputText library="javax.faces" name="jsf.js" target="head" id = "waggons" value = "
-    #{loadInfo.infoWaggon.allWaggonsCount}
-    #{loadInfo.infoWaggon.brokenWaggonCount}
-    #{loadInfo.infoWaggon.workingWaggonCount}
-    #{loadInfo.infoWaggon.freeWaggonsCount}
-    #{loadInfo.infoWaggon.busyWaggonsCount}">
+    <h:column library="javax.faces" name="jsf.js" target="head">
+    <f:facet name="header">Broken waggons</f:facet>
+        #{loadInfo.infoWaggon.brokenWaggonCount}
+    </h:column>
 
+    <h:column library="javax.faces" name="jsf.js" target="head">
+    <f:facet name="header">Working waggons</f:facet>
+        #{loadInfo.infoWaggon.workingWaggonCount}
+    </h:column>
+
+    <h:column library="javax.faces" name="jsf.js" target="head">
+    <f:facet name="header">Free waggons</f:facet>
+        #{loadInfo.infoWaggon.freeWaggonsCount}
+    </h:column>
+
+    <h:column library="javax.faces" name="jsf.js" target="head">
+    <f:facet name="header">Busy waggons</f:facet>
+        #{loadInfo.infoWaggon.busyWaggonsCount}
+    </h:column>
+</h:dataTable>
+    <h:form>
         <f:websocket channel="update" >
             <f:ajax event="update" render=":waggons"/>
         </f:websocket>
-    </h:outputText>
+    </h:form>
 </h:body>
-
 
 </html>

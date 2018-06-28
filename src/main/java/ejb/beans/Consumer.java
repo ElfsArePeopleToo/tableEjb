@@ -24,9 +24,6 @@ public class Consumer{
     private Connection connection;
     private Channel channel;
 
-    @Inject
-    private BeanManager beanManager;
-
     public List<OrderJson> receive(String QueueName){
     try {
         ConnectionFactory factory = new ConnectionFactory();
