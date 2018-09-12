@@ -1,5 +1,6 @@
-Aplication type: read only display.
-read info from https://github.com/ElfsArePeopleToo/delivery by rabbit mq consumer.
+Aplication type: read only display.<br/>
+read info from https://github.com/ElfsArePeopleToo/delivery by rabbit mq consumer.<br/>
+
 *EJB<br/>
 *JSF<br/>
 *RabbitMq<br/>
